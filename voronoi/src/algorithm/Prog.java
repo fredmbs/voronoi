@@ -66,6 +66,7 @@ public class Prog extends Program {
     private boolean forwardPresenceOnAdd = true;
     private boolean announcePresencePeriodically = true;
     private boolean floodOnForwardFail = true;
+    private int messageDeep = 8;
 
     // ----------------------------------------------------------------------
     // called for initialization of program
@@ -112,6 +113,9 @@ public class Prog extends Program {
         this.cleanupDelay = cleanupDelay;
     }
 
+    public void setMessageDeep(int messageDeep) {
+        this.messageDeep = messageDeep;
+    }
     // ----------------------------------------------------------------------
     // called for execution of program
     // ----------------------------------------------------------------------
@@ -200,7 +204,7 @@ public class Prog extends Program {
      * Create message with current site information and send to all channels.
      */ 
     private Msg send(Msg.MsgType msgType) {
-        Msg out = new Msg(site, ++eventNumber, msgType);
+        Msg out = new Msg(site, ++eventNumber, msgType, messageDeep);
         out().send(out);
         refreshTimer.restart();
         return out;
@@ -211,7 +215,7 @@ public class Prog extends Program {
      */ 
     private Msg send(Msg.MsgType msgType, Site to, int through) {
         if (through >= 0 && through < out().getSize()) { 
-            Msg out = new Msg(site, ++eventNumber, msgType, to);
+            Msg out = new Msg(site, ++eventNumber, msgType, to, messageDeep);
             out(through).send(out);
             return out;
         }
@@ -360,4 +364,5 @@ public class Prog extends Program {
         return "Prog [site=" + site + ", msg=" + lastMsg + 
                 ", count=" + eventNumber + "]";
     }
+
 }

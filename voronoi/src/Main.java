@@ -88,6 +88,7 @@ public class Main extends Application {
         newProg.setCleanupDelay(cfg.cleanupDelay);
         newProg.setfPresenceDelay(cfg.presenceDelay);
         newProg.setMovementDelay(cfg.movementDelay);
+        newProg.setMessageDeep(cfg.messageDeep);
         // convert from space (x, y) to canvas (x, y), if necessary.
         return node(newProg, Integer.toString(newId), x, y);
     }

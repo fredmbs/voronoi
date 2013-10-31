@@ -41,7 +41,7 @@ class Msg extends Message {
         MOVEMENT
     }
     
-    private int deep = 8;
+    private int deep;
     private MsgType type;
     private Site from;
     private int remainingHops;
@@ -58,15 +58,16 @@ class Msg extends Message {
             this.to = new Site(msg.to);
     }
     
-    public Msg (Site site, int time, MsgType type) {
+    public Msg (Site site, int time, MsgType type, int deep) {
         this.from = new Site(site);
         this.type = type;
+        this.deep = deep;
         this.remainingHops = deep;
         this.localTime = time;
     }
     
-    public Msg (Site site, int time, MsgType type, Site to) {
-        this(site, time, type);
+    public Msg (Site site, int time, MsgType type, Site to, int deep) {
+        this(site, time, type, deep);
         this.to = new Site(to);
     }
     

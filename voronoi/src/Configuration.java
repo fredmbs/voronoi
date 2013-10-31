@@ -62,8 +62,10 @@ public class Configuration extends JDialog {
     public int presenceDelay = 10000;
     public int movementDelay = 1000;
     public int cleanupDelay = 15000;
+    public int messageDeep = 8;
     public boolean ok = false;
-    public String[] testCases = {"Grid", "Basic", "Linear", "Geometric", "Random"};
+    public String[] testCases = {"Grid", "Basic", "Linear", "Geometric", 
+            "Random"};
     /**
      * Launch the application.
      */
@@ -85,12 +87,12 @@ public class Configuration extends JDialog {
         setModal(true);
         setAlwaysOnTop(true);
         setTitle("Distributed Voronoi Diagram");
-        setBounds(100, 100, 412, 329);
+        setBounds(100, 100, 420, 370);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] {189, 73, 15};
-        gridBagLayout.rowHeights = new int[] {34, 20, 23, 23, 23, 23, 23, 23, 0, 33, 0};
+        gridBagLayout.rowHeights = new int[] {34, 20, 23, 23, 23, 23, 23, 23, 0, 0, 33, 0};
         gridBagLayout.columnWeights = new double[]{0.0, 0.0};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         contentPanel.setLayout(new FlowLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -296,6 +298,32 @@ public class Configuration extends JDialog {
             getContentPane().add(lblMs_2, gbc_lblMs_2);
         }
         {
+            JCheckBox chckbxMessagedeep = new JCheckBox("MessageDeep");
+            chckbxMessagedeep.setSelected(true);
+            chckbxMessagedeep.setEnabled(false);
+            GridBagConstraints gbc_chckbxMessagedeep = new GridBagConstraints();
+            gbc_chckbxMessagedeep.anchor = GridBagConstraints.WEST;
+            gbc_chckbxMessagedeep.insets = new Insets(0, 0, 5, 5);
+            gbc_chckbxMessagedeep.gridx = 0;
+            gbc_chckbxMessagedeep.gridy = 8;
+            getContentPane().add(chckbxMessagedeep, gbc_chckbxMessagedeep);
+        }
+        {
+            final JSpinner spinnerMessagedeep = new JSpinner();
+            spinnerMessagedeep.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent arg0) {
+                    messageDeep = (Integer)spinnerMessagedeep.getValue();
+                }
+            });
+            spinnerMessagedeep.setModel(new SpinnerNumberModel(messageDeep, new Integer(0), null, new Integer(1)));
+            GridBagConstraints gbc_spinnerMessagedeep = new GridBagConstraints();
+            gbc_spinnerMessagedeep.fill = GridBagConstraints.HORIZONTAL;
+            gbc_spinnerMessagedeep.insets = new Insets(0, 0, 5, 5);
+            gbc_spinnerMessagedeep.gridx = 1;
+            gbc_spinnerMessagedeep.gridy = 8;
+            getContentPane().add(spinnerMessagedeep, gbc_spinnerMessagedeep);
+        }
+        {
             JPanel buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             GridBagConstraints gbc_buttonPane = new GridBagConstraints();
@@ -304,7 +332,7 @@ public class Configuration extends JDialog {
             gbc_buttonPane.fill = GridBagConstraints.HORIZONTAL;
             gbc_buttonPane.gridwidth = 2;
             gbc_buttonPane.gridx = 0;
-            gbc_buttonPane.gridy = 8;
+            gbc_buttonPane.gridy = 9;
             getContentPane().add(buttonPane, gbc_buttonPane);
             {
                 JButton okButton = new JButton("OK");
