@@ -97,14 +97,14 @@ public class DelaunayAp extends Applet
         dWindow.setSize(750, 550);      // Set window size
         dWindow.setTitle(windowTitle);  // Set window title
         dWindow.setLayout(new BorderLayout());   // Specify layout manager
+        // Specify closing behavior
         if (mainWindow) 
             dWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         else
             dWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-                                                 // Specify closing behavior
         dWindow.add(this, "Center");           // Place applet into window
         dWindow.setFocusable(true);
-        dWindow.setVisible(true);                // Show the window
+        dWindow.setVisible(true);              // Show the window
     }
 
     /**
@@ -118,11 +118,11 @@ public class DelaunayAp extends Applet
     }
 
     private void refresh(JComponent c) {
-        c.revalidate();
+        //c.revalidate();
         c.repaint();
         JComponent pane = c.getRootPane();
         if (pane != null) {
-            pane.revalidate();
+            //pane.revalidate();
             pane.repaint();
         }
     }
